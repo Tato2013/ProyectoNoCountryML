@@ -16,7 +16,7 @@ app=FastAPI()
 
 
 
-class Config:
+class AppConfig:
     def __init__(self):
         # Crea una instancia de Config de decouple
         self.config = Config()
