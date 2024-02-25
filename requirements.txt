@@ -142,7 +142,7 @@ python-dateutil
 python-decouple
 python-dotenv
 python-json-logger
-python-pptx2==0.6.19
+python-pptx
 pytz
 pytz-deprecation-shim
 PyWavelets
