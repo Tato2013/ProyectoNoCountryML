@@ -94,7 +94,7 @@ multimethod
 multitasking
 mysql-connector-python
 nbclient
-nbconver
+nbconvert
 nbformat
 nest-asyncio
 networkx
