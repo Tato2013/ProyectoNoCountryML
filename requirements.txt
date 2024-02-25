@@ -86,6 +86,7 @@ markdown-it-py
 MarkupSafe
 matplotlib
 matplotlib-inline
+maturin
 mdurl
 missingno
 mistune
