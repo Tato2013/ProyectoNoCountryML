@@ -3,12 +3,10 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 from sqlalchemy import create_engine, Column, column, Integer, Float, String, Text, Boolean, Date, DateTime, Time, MetaData, Table, text, insert, select
-from xgboost import XGBRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error,r2_score
 import time
-import pickle
 from decouple import Config, Csv
 
 #************************
@@ -29,7 +27,9 @@ host = config('DB_HOST')
 port = config('DB_PORT')
 database = config('DB_DATABASE')
 
+#*******************************
 # Construye la URL de conexión
+#********************************
 db_url = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
 engine = create_engine(db_url)
 historico = pd.read_sql('historico', engine)
@@ -44,16 +44,6 @@ nueva_fecha = ultima_fecha + pd.DateOffset(days=7)
 #**********************************
 #Crear funciones
 #**********************************
-def cargar_modelo(accion: str):
-    try:
-        nombre_archivo = f'modelo_{accion}.pkl'
-        with open(nombre_archivo, 'rb') as file:
-            modelo_cargado = pickle.load(file)
-        return modelo_cargado
-    except FileNotFoundError:
-        raise print(status_code=404, detail=f'Modelo para la acción {accion} no encontrado.')
-    except Exception as e:
-        raise print(status_code=500, detail=f'Ocurrió un error al cargar el modelo: {str(e)}')
 
 def generar_caracteristicas_futuras(ultima_fecha):
     nueva_fecha = ultima_fecha + pd.DateOffset(days=7)
@@ -64,7 +54,7 @@ def generar_caracteristicas_futuras(ultima_fecha):
 
 #**************************
 #Se define consulta
-#
+#**************************
 
     
 @app.get("/accion/{accion}")
