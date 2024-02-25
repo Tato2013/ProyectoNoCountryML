@@ -7,7 +7,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error,r2_score
 import time
-from decouple import Config, Csv
+import os
+from dotenv import find_dotenv , load_dotenv
 
 #**********************************
 #Configurar variables de entorno
@@ -16,24 +17,20 @@ app=FastAPI()
 
 
 
-config = Config()
-
 # Carga las variables de entorno desde el archivo .env
-config.read_dotenv()
+dotenv_patch=find_dotenv()
 
-# Obtener los valores de las variables de entorno
-repository_value = config('REPOSITORY_VALUE')
-
+load_dotenv(dotenv_patch)
 #*********************************************************
-#Ingreso a la base de datos                              *
+# Ingreso a la base de datos                              *
 #*********************************************************
 
 # Obtén los valores de las variables de entorno
-username = config('DB_USERNAME')
-password = config('DB_PASSWORD')
-host = config('DB_HOST')
-port = config('DB_PORT')
-database = config('DB_DATABASE')
+username = os.getenv('DB_USERNAME')
+password = os.getenv('DB_PASSWORD')
+host = os.getenv('DB_HOST')
+port = os.getenv('DB_PORT')
+database = os.getenv('DB_DATABASE')
 
 #*******************************
 # Construye la URL de conexión
