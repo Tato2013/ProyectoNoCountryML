@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
@@ -68,8 +68,7 @@ def obtener_prediccion_RandonForest(accion: str) -> dict:
     accion = accion.upper()
     
     if accion not in acciones:
-        return {'error': 'La acción proporcionada no está en la lista de acciones disponibles.',
-                'Elija entre' : acciones}
+        raise HTTPException(status_code=404, detail=f'La acción {accion} no está en la lista de acciones disponibles. Elija entre: {acciones}')
     df_accion = historico[historico['Ticket'] == accion]
     
     # Obtener características (X) y variable objetivo (y) para la acción actual
