@@ -9,16 +9,33 @@ from sklearn.metrics import mean_squared_error,r2_score
 import time
 from decouple import Config, Csv
 
-#************************
-#Configurar variables
-#************************
+#**********************************
+#Configurar variables de entorno
+#**********************************
 app=FastAPI()
-#Ingreso a la base de datos
 
+
+
+class Config:
+    def __init__(self):
+        # Crea una instancia de Config de decouple
+        self.config = Config()
+        # Carga las variables de entorno desde el archivo .env
+        self.config.read_dotenv()
+
+    def get(self, key):
+        # Obtiene el valor de la variable de entorno
+        return self.config(key)
+
+# Crear una instancia de la clase Config
 config = Config()
 
-# Carga las variables de entorno desde el archivo .env
-config.read_dotenv()
+# Obtener los valores de las variables de entorno
+repository_value = config.get('REPOSITORY_VALUE')
+
+#*********************************************************
+#Ingreso a la base de datos                              *
+#*********************************************************
 
 # Obtén los valores de las variables de entorno
 username = config('DB_USERNAME')
