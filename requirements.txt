@@ -2,8 +2,6 @@ altair
 annotated-types
 anyio
 appdirs
-argon-cffi
-argon-cffi-bindings
 arrow
 asttokens
 async-lru
