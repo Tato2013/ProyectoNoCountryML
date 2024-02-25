@@ -16,22 +16,13 @@ app=FastAPI()
 
 
 
-class AppConfig:
-    def __init__(self):
-        # Crea una instancia de Config de decouple
-        self.config = Config()
-        # Carga las variables de entorno desde el archivo .env
-        self.config.read_dotenv()
-
-    def get(self, key):
-        # Obtiene el valor de la variable de entorno
-        return self.config(key)
-
-# Crear una instancia de la clase Config
 config = Config()
 
+# Carga las variables de entorno desde el archivo .env
+config.read_dotenv()
+
 # Obtener los valores de las variables de entorno
-repository_value = config.get('REPOSITORY_VALUE')
+repository_value = config('REPOSITORY_VALUE')
 
 #*********************************************************
 #Ingreso a la base de datos                              *
