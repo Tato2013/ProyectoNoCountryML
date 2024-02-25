@@ -16,7 +16,6 @@ from dotenv import find_dotenv , load_dotenv
 app=FastAPI()
 
 
-
 # Carga las variables de entorno desde el archivo .env
 dotenv_patch=find_dotenv()
 
@@ -45,6 +44,7 @@ historico['Fecha'] = historico['Date'].astype('int64') // 10**9
 ultima_fecha = historico['Date'].max()  # Asegúrate de que 'Fecha' esté en formato de fecha
 # Crear características para la predicción futura
 nueva_fecha = ultima_fecha + pd.DateOffset(days=7)
+acciones = historico['Ticket'].unique()
 
 #**********************************
 #Crear funciones
@@ -64,6 +64,11 @@ def generar_caracteristicas_futuras(ultima_fecha):
     
 @app.get("/accion/{accion}")
 def obtener_prediccion_RandonForest(accion: str) -> dict:
+    # Convertir la acción a mayúsculas
+    accion = accion.upper()
+    
+    if accion not in acciones:
+        return {f'error': 'La acción proporcionada no está en la lista de acciones disponibles. Elija entre: {acciones}'}
     df_accion = historico[historico['Ticket'] == accion]
     
     # Obtener características (X) y variable objetivo (y) para la acción actual
