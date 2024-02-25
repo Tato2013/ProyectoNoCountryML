@@ -146,7 +146,7 @@ python-pptx
 pytz
 pytz-deprecation-shim
 PyWavelets
-pywin32
+pywin32==306
 pywinpty
 PyYAML
 pyzmq
