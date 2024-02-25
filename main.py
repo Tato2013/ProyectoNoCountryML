@@ -68,7 +68,8 @@ def obtener_prediccion_RandonForest(accion: str) -> dict:
     accion = accion.upper()
     
     if accion not in acciones:
-        return {f'error': 'La acción proporcionada no está en la lista de acciones disponibles. Elija entre: {acciones}'}
+        return {'error': 'La acción proporcionada no está en la lista de acciones disponibles.',
+                'Elija entre' : acciones}
     df_accion = historico[historico['Ticket'] == accion]
     
     # Obtener características (X) y variable objetivo (y) para la acción actual
