@@ -50,7 +50,7 @@ Para acceder al repositorio completo del proyecto, donde trabajo el equipo compl
 Marcelo Peralta
 | Forma de Contacto | Enlace                           |
 |-------------------|----------------------------------|
-| Correo            | [cheloperalta22@gmail.com](cheloperalta22@gmail.com)     |
-| LinkedIn          | [Marcelo Peralta](www.linkedin.com/in/marcelo-peralta2) |
-| WhatsApp          | [Mensaje por WhatsApp](https://wa.me/+542616325753)  |
+| Correo            | [cheloperalta22@gmail.com](mailto:cheloperalta22@gmail.com)     |
+| LinkedIn          | [Marcelo Peralta](https://www.linkedin.com/in/marcelo-peralta2) |
+| WhatsApp          | [Mensaje por WhatsApp](https://wa.me/++5492616325753)  |
 
