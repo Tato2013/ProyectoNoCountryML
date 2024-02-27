@@ -4,7 +4,7 @@
 
 ## Introducción 
 
-Bienvenido al proyecto de simulación de consultoría financiera, donde se lleva a cabo un análisis para orientar futuras inversiones. En esta sección, presentaremos un modelo de Machine Learning 
+Bienvenido al proyecto de simulación de consultoría financiera GROWTREND, donde se lleva a cabo un análisis para orientar futuras inversiones. En esta sección, presentaremos un modelo de Machine Learning 
 diseñado para comprender posibles tendencias futuras mediante estimaciones basadas en el estudio de los últimos 5 años de datos de acciones.
 
 ## Recursos
@@ -20,7 +20,7 @@ El modelo se entrena utilizando los precios históricos de las siguientes accion
 
 Los datos históricos se obtienen mediante la API de yfinance, que proporciona una interfaz sencilla para acceder a información financiera detallada. Puedes obtener más información sobre yfinance.
 
-## Stack tegnologico
+## Stack tecnologico
 
 En el stack tecnológico, hacemos uso de Python como nuestra herramienta principal, destacando las siguientes bibliotecas:
 
