@@ -52,12 +52,6 @@ acciones = historico['Ticket'].unique()
 #Crear funciones
 #**********************************
 
-def generar_caracteristicas_futuras(ultima_fecha):
-    nueva_fecha = ultima_fecha + pd.DateOffset(days=7)
-    # Ajusta esta lógica según tus necesidades
-    nuevas_caracteristicas = pd.DataFrame({'Fecha': [nueva_fecha.timestamp() // 1e9]})
-    return nuevas_caracteristicas
-
 def rendimiento_mensual(accion,fecha1,ultima_fecha):
     df_accion = historico[(historico['Ticket'] == accion) & (historico['Date'] >= fecha1) & (historico['Date'] <= ultima_fecha)]
 
@@ -88,18 +82,20 @@ def encontrar_primer_dia_habil(accion, ultima_fecha):
 #Se define consulta
 #**************************
 
-    
+#___________________________________________________________________
+#consulta RandomForest
+#___________________________________________________________________
 @app.get("/accion/rf/{accion}")
 def obtener_prediccion_RandonForest(accion: str) -> dict:
     # Convertir la acción a mayúsculas
     accion = accion.upper()
-    
+    #Verificar datos
     if accion not in acciones:
         raise HTTPException(status_code=404, detail=f'La acción {accion} no está en la lista de acciones disponibles. Elija entre: {acciones}')
     df_accion = historico[historico['Ticket'] == accion]
     
     # Obtener características (X) y variable objetivo (y) para la acción actual
-    X = df_accion[['Fecha']]  # Agrega las características relevantes
+    X = df_accion[['Fecha']]  
     y = df_accion['Close']
     
     # División de datos en conjunto de entrenamiento y prueba
@@ -127,15 +123,19 @@ def obtener_prediccion_RandonForest(accion: str) -> dict:
         'Fecha': ultima_fecha,
         'R2':r2
     }
+    
+#_____________________________________________________________
+#Consulta Regresion Lineal
+#______________________________________________________________    
 @app.get("/accion/regresion/{accion}")
 def obtener_prediccion_RegresionLineal(accion: str) -> dict:
     # Convertir la acción a mayúsculas
     accion = accion.upper()
-    
+    #Verificar datos
     if accion not in acciones:
         raise HTTPException(status_code=404, detail=f'La acción {accion} no está en la lista de acciones disponibles. Elija entre: {acciones}')
     df_accion = historico[historico['Ticket'] == accion]
-    X = df_accion[['Fecha']]  # Agrega las características relevantes
+    X = df_accion[['Fecha']]  
     y = df_accion['Close']
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     
@@ -164,12 +164,16 @@ def obtener_prediccion_RegresionLineal(accion: str) -> dict:
         'Fecha': ultima_fecha,
         'R2':r2
     }
+    
+#_____________________________________________________________
+#Consulta comparacion de acciones rendiemiento semanal
+#______________________________________________________________     
 @app.get("/accion/comparacion")
 def comparar_rendimiento(accion1: str, accion2: str) -> dict:
     # Convertir las acciones a mayúsculas
     accion1, accion2 = accion1.upper(), accion2.upper()
 
-    # Verificar si las acciones están en la lista
+    #Verificar datos
     if accion1 not in acciones or accion2 not in acciones:
         raise HTTPException(status_code=404, detail=f'Una o ambas acciones no están en la lista de acciones disponibles. Elija entre: {acciones}')
     ultima_fecha = historico['Date'].max()
@@ -195,7 +199,9 @@ def comparar_rendimiento(accion1: str, accion2: str) -> dict:
 
     # Retornar ambos diccionarios en un diccionario principal
     return {"accion1": resultado_accion1, "accion2": resultado_accion2}
-
+#_____________________________________________________________
+#Consulta Rendimiento Semanal de la accion
+#______________________________________________________________ 
 @app.get("/accion/RendimeintoSemanal/{accion}")
 def Rendimiento_ultima_Semana(accion: str) -> dict:
     # Convertir la acción a mayúsculas
@@ -210,7 +216,7 @@ def Rendimiento_ultima_Semana(accion: str) -> dict:
     #Creo un diccionario para mostrar los resultados
     resultado = {}
 
-    # Iterar sobre cada fila del DataFrame y agregar la información al diccionario
+    # Crear diccionario
     for index, row in df.iterrows():
         fecha = str(row['Date'])
         rendimiento_diario = row['Rendimiento_diario']
@@ -224,10 +230,14 @@ def Rendimiento_ultima_Semana(accion: str) -> dict:
     return resultado
 
 
+#_____________________________________________________________
+#Consulta Ultimos datos ingreasados
+#______________________________________________________________ 
+
 @app.get("/accion/informacion-ultimo-dia/{accion}")
 def informacion_ultimo_dia(accion: str) -> dict:
     accion = accion.upper()
-    
+    #Verificar datos
     if accion not in acciones:
         raise HTTPException(status_code=404, detail=f'La acción {accion} no está en la lista de acciones disponibles. Elija entre: {acciones}')
     
@@ -242,4 +252,4 @@ def informacion_ultimo_dia(accion: str) -> dict:
     info_ultimo_dia = df_accion.iloc[-1].to_dict()
     
     return info_ultimo_dia
-       
+#-------------------------------------------------------------------------------------------------------------------      

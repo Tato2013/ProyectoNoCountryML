@@ -22,7 +22,7 @@ Se Puede ingresar al mismo por el siguente [Link](https://proyectonocountryml.on
 
 La API cuenta con las siguentes consultas:
 
-### Modelo RamdonForest
+### Modelo RandomForest
 
 - **Descripción:** Este modelo, entrenado con datos limitados, predice un posible precio para la próxima semana. Dada la variabilidad en las acciones, la precisión puede ser limitada.
 
