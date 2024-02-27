@@ -10,6 +10,7 @@ from sklearn.metrics import mean_squared_error,r2_score
 import time
 import os
 from dotenv import find_dotenv , load_dotenv
+from typing import Dict
 
 #**********************************
 #Configurar variables de entorno
@@ -183,14 +184,62 @@ def comparar_rendimiento(accion1: str, accion2: str) -> dict:
     resultado_accion1 = {
         "accion": accion1,
         "periodo": f"{fecha_inicio} - {ultima_fecha}",
-        "rendimiento_mensual": rendimiento1
+        "rendimiento_mensual%": rendimiento1
     }
 
     resultado_accion2 = {
         "accion": accion2,
         "periodo": f"{fecha_inicio} - {ultima_fecha}",
-        "rendimiento_mensual": rendimiento2
+        "rendimiento_mensual%": rendimiento2
     }
 
     # Retornar ambos diccionarios en un diccionario principal
     return {"accion1": resultado_accion1, "accion2": resultado_accion2}
+
+@app.get("/accion/RendimeintoSemanal/{accion}")
+def Rendimiento_ultima_Semana(accion: str) -> dict:
+    # Convertir la acción a mayúsculas
+    accion = accion.upper()
+    
+    if accion not in acciones:
+        raise HTTPException(status_code=404, detail=f'La acción {accion} no está en la lista de acciones disponibles. Elija entre: {acciones}')
+    df_accion = historico[historico['Ticket'] == accion]
+    df=df_accion.tail(7)   
+    df['Rendimiento_diario'] =( df['Close'] - df['Open']/ df['Open']) * 100
+    
+    #Creo un diccionario para mostrar los resultados
+    resultado = {}
+
+    # Iterar sobre cada fila del DataFrame y agregar la información al diccionario
+    for index, row in df.iterrows():
+        fecha = str(row['Date'])
+        rendimiento_diario = row['Rendimiento_diario']
+        valor_cierre = row['Close']
+
+        resultado[fecha] = {
+            'Rendimiento_diario': rendimiento_diario,
+            'Valor_cierre': valor_cierre
+        }
+
+    return resultado
+
+
+@app.get("/accion/informacion-ultimo-dia/{accion}")
+def informacion_ultimo_dia(accion: str) -> dict:
+    accion = accion.upper()
+    
+    if accion not in acciones:
+        raise HTTPException(status_code=404, detail=f'La acción {accion} no está en la lista de acciones disponibles. Elija entre: {acciones}')
+    
+    # Filtrar el DataFrame para obtener la información del último día para la acción ingresada
+    df_accion = historico[historico['Ticket'] == accion]
+    
+    # Verificar si hay datos para la acción ingresada
+    if df_accion.empty:
+        raise HTTPException(status_code=404, detail=f'No hay información disponible para la acción {accion}.')
+    
+    # Obtener la información del último día
+    info_ultimo_dia = df_accion.iloc[-1].to_dict()
+    
+    return info_ultimo_dia
+       

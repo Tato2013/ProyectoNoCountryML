@@ -13,12 +13,39 @@ En este proyecto, se ha utilizado un modelo de Random Forest para prever tendenc
 como modelos especializados en series temporales o la combinación de varios modelos.También se puede considerar la integración de información externa, como noticias, para analizar la reacción del mercado
 y los sentimientos de los accionistas e inversores.
 
-## API yfinance
+## API 
 El modelo se entrena utilizando los precios históricos de las siguientes acciones:
 
 ['AAPL' 'GOOG' 'MSFT' 'NVDA' 'AMZN' 'NFLX' 'TSLA' 'META' 'AMD' 'XOM' 'UBER' 'QCOM' 'COIN' 'KO' 'BAC' 'HD' 'PYPL' 'JPM' 'UNH' 'V']
 
-Los datos históricos se obtienen mediante la API de yfinance, que proporciona una interfaz sencilla para acceder a información financiera detallada. Puedes obtener más información sobre yfinance.
+Se Puede ingresar al mismo por el siguente [Link](https://proyectonocountryml.onrender.com/docs)
+
+La API cuenta con las siguentes consultas:
+
+### Modelo RamdonForest
+
+- **Descripción:** Este modelo, entrenado con datos limitados, predice un posible precio para la próxima semana. Dada la variabilidad en las acciones, la precisión puede ser limitada.
+
+### Modelo de Regresión Lineal
+
+- **Descripción:** Similar al modelo anterior, este utiliza regresión lineal para predecir un posible precio a una semana. También puede servir como base para un modelo de ensamble.
+
+### Comparación del Rendimiento Mensual de Dos Acciones
+
+- **Descripción:** Permite comparar el rendimiento en porcentaje de dos acciones para el último mes transcurrido.
+
+### Rendimiento Diario de la Última Semana
+
+- **Descripción:** Calcula el rendimiento diario en porcentaje y devuelve los resultados para la última semana de la acción consultada.
+
+### Informacion del ultimo dia
+
+- **Descripción:** Muestra la información de la acción seleccionada para el último día registrado en la base de datos.
+
+
+### Consideracion
+
+La base de datos es gratuita y el proyecto solo tiene 3 meses de funcionalidad que es lo que nos permite render utilizar de forma gratuita hasta 30/04/2024
 
 ## Stack tecnologico
 
