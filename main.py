@@ -205,7 +205,7 @@ def Rendimiento_ultima_Semana(accion: str) -> dict:
         raise HTTPException(status_code=404, detail=f'La acción {accion} no está en la lista de acciones disponibles. Elija entre: {acciones}')
     df_accion = historico[historico['Ticket'] == accion]
     df=df_accion.tail(7)   
-    df['Rendimiento_diario'] =( df['Close'] - df['Open']/ df['Open']) * 100
+    df['Rendimiento_diario'] =( df['Close'] - df['Open']/ df['Open'])
     
     #Creo un diccionario para mostrar los resultados
     resultado = {}
@@ -217,7 +217,7 @@ def Rendimiento_ultima_Semana(accion: str) -> dict:
         valor_cierre = row['Close']
 
         resultado[fecha] = {
-            'Rendimiento_diario': rendimiento_diario,
+            'Rendimiento_diario%': rendimiento_diario,
             'Valor_cierre': valor_cierre
         }
 
