@@ -109,24 +109,31 @@ def obtener_prediccion_RandonForest(accion: str) -> dict:
     
     # Almacenar el modelo en el diccionario
     ultima_fecha = historico['Date'].max()+ timedelta(days=7)
+    ultima_fecha = historico['Date'].max()
+    fecha_prediccion = ultima_fecha + timedelta(days=7)
+    fecha_prediccion=fecha_prediccion
+    # Crear un nuevo DataFrame con la fecha de predicción
+    nueva_entrada = pd.DataFrame({'Fecha': [fecha_prediccion]})
+    X_prediccion = nueva_entrada[['Fecha']].astype('int64') // 10**9
 
-    # Predicciones en el conjunto de prueba
-    y_pred = modelo_rf.predict(X_test)
+# Realizar la predicción para la fecha futura
+    precio_predicho = modelo_rf.predict(X_prediccion)
     
-   
-    # Evaluación del rendimiento del modelo
-    
-    r2 = r2_score(y_test, y_pred)
+    y_pred_test = modelo_rf.predict(X_test)
+
+    # Evaluar el rendimiento del modelo utilizando r2_score en el conjunto de prueba
+    r2 = r2_score(y_test, y_pred_test)
     return {
         "accion": accion,
-        "prediccion_futura":y_pred[0],
+        "prediccion_futura":precio_predicho[0],
         'Fecha': ultima_fecha,
         'R2':r2
     }
     
 #_____________________________________________________________
 #Consulta Regresion Lineal
-#______________________________________________________________    
+#______________________________________________________________  
+  
 @app.get("/accion/regresion/{accion}")
 def obtener_prediccion_RegresionLineal(accion: str) -> dict:
     # Convertir la acción a mayúsculas
@@ -150,24 +157,32 @@ def obtener_prediccion_RegresionLineal(accion: str) -> dict:
     
     # Almacenar el modelo en el diccionario
     ultima_fecha = historico['Date'].max()+ timedelta(days=7)
+    ultima_fecha = historico['Date'].max()
+    fecha_prediccion = ultima_fecha + timedelta(days=7)
+    fecha_prediccion=fecha_prediccion
+    # Crear un nuevo DataFrame con la fecha de predicción
+    nueva_entrada = pd.DataFrame({'Fecha': [fecha_prediccion]})
+    X_prediccion = nueva_entrada[['Fecha']].astype('int64') // 10**9
 
-    # Predicciones en el conjunto de prueba
-    y_pred = modelo_regresion.predict(X_test)
+# Realizar la predicción para la fecha futura
+    precio_predicho = modelo_regresion.predict(X_prediccion)
     
+    y_pred_test = modelo_regresion.predict(X_test)
    
     # Evaluación del rendimiento del modelo
     
-    r2 = r2_score(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred_test)
     return {
         "accion": accion,
-        "prediccion_futura":y_pred[0],
+        "prediccion_futura":precio_predicho[0],
         'Fecha': ultima_fecha,
         'R2':r2
     }
     
 #_____________________________________________________________
 #Consulta comparacion de acciones rendiemiento semanal
-#______________________________________________________________     
+#______________________________________________________________   
+  
 @app.get("/accion/comparacion")
 def comparar_rendimiento(accion1: str, accion2: str) -> dict:
     # Convertir las acciones a mayúsculas
@@ -202,6 +217,7 @@ def comparar_rendimiento(accion1: str, accion2: str) -> dict:
 #_____________________________________________________________
 #Consulta Rendimiento Semanal de la accion
 #______________________________________________________________ 
+
 @app.get("/accion/RendimeintoSemanal/{accion}")
 def Rendimiento_ultima_Semana(accion: str) -> dict:
     # Convertir la acción a mayúsculas
@@ -229,7 +245,6 @@ def Rendimiento_ultima_Semana(accion: str) -> dict:
         }
 
     return resultado
-
 
 #_____________________________________________________________
 #Consulta Ultimos datos ingreasados
