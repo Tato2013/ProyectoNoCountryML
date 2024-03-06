@@ -80,6 +80,7 @@ Un equipo dedicado a la ingeniería de datos proporciona una sólida base de dat
 ### Analistas de datos:
 Nuestro equipo de analistas trabaja en un dashboard que facilita la presentación visual de los resultados y hallazgos. Este dashboard proporciona una interfaz intuitiva para interpretar y comunicar eficazmente las tendencias financieras descubiertas.
 Aca pueden ver su trabajo realizado [Dashboard](https://www.novypro.com/project/dashboard-de-análisis-de-tendencias-de-acciones)
+
 Repositorio General del Proyecto
 
 Para acceder al repositorio completo del proyecto, donde trabajo el equipo completo: [Repositorio del equipo](https://github.com/No-Country/c16-96-m-data-bi).
