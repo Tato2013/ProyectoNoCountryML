@@ -120,13 +120,13 @@ def obtener_prediccion_RandonForest(accion: str) -> dict:
     precio_predicho = modelo_rf.predict(X_prediccion)
     
     y_pred_test = modelo_rf.predict(X_test)
-
+    fecha_formateada = fecha_prediccion.strftime('%Y-%m-%d')
     # Evaluar el rendimiento del modelo utilizando r2_score en el conjunto de prueba
     r2 = r2_score(y_test, y_pred_test)
     return {
         "accion": accion,
         "prediccion_futura":precio_predicho[0],
-        'Fecha': fecha_prediccion,
+        'Fecha': fecha_formateada,
         'R2':r2
     }
     
@@ -170,12 +170,12 @@ def obtener_prediccion_RegresionLineal(accion: str) -> dict:
     y_pred_test = modelo_regresion.predict(X_test)
    
     # Evaluación del rendimiento del modelo
-    
+    fecha_formateada = fecha_prediccion.strftime('%Y-%m-%d')
     r2 = r2_score(y_test, y_pred_test)
     return {
         "accion": accion,
         "prediccion_futura":precio_predicho[0],
-        'Fecha': fecha_prediccion,
+        'Fecha': fecha_formateada,
         'R2':r2
     }
     
