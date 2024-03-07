@@ -1,11 +1,21 @@
+![imagen](https://github.com/Tato2013/ProyectoNoCountryML/assets/101934772/018322db-192d-4c44-8725-35c0dab4844b)
+
 # Análisis de Tendencias Financieras en Acciones
+
 
 
 
 ## Introducción 
 
-Bienvenido al proyecto de simulación de consultoría financiera GROWTREND, donde se lleva a cabo un análisis para orientar futuras inversiones. En esta sección, presentaremos un modelo de Machine Learning 
-diseñado para comprender posibles tendencias futuras mediante estimaciones basadas en el estudio de los últimos 5 años de datos de acciones.
+Bienvenido al proyecto de simulación de consultoría financiera GROWTREND, donde llevamos a cabo análisis profundos para guiar futuras inversiones con enfoque técnico. Nuestro objetivo es proporcionar orientación estratégica a los clientes, sugiriendo inversiones en acciones en momentos óptimos para maximizar ganancias a corto y largo plazo.
+
+En el dinámico escenario financiero actual, la toma de decisiones informada es esencial. A través de este proyecto, hemos desarrollado un modelo de Machine Learning que se basa en el estudio de datos de acciones de los últimos 5 años. Este modelo nos permite comprender posibles tendencias futuras, ofreciendo a nuestros clientes una herramienta valiosa para la toma de decisiones financieras.
+
+Exploraremos la metodología específica y los algoritmos de Machine Learning utilizados en este análisis, proporcionando una visión detallada de cómo abordamos la complejidad del mercado financiero. Creemos que la simulación y el análisis de datos históricos son fundamentales para anticipar cambios y brindar a nuestros clientes la ventaja competitiva necesaria en el mundo de las inversiones.
+
+GROWTREND no solo busca ofrecer información, sino también proporcionar beneficios tangibles a nuestros clientes. Nuestra simulación no solo revela posibles tendencias, sino que también respalda decisiones informadas que pueden influir positivamente en el rendimiento de las inversiones.
+
+Únete a nosotros en este viaje hacia el conocimiento financiero avanzado. Con GROWTREND, transformamos datos en estrategias y convertimos la incertidumbre en oportunidad.
 
 ## Recursos
 
@@ -69,6 +79,8 @@ Un equipo dedicado a la ingeniería de datos proporciona una sólida base de dat
 
 ### Analistas de datos:
 Nuestro equipo de analistas trabaja en un dashboard que facilita la presentación visual de los resultados y hallazgos. Este dashboard proporciona una interfaz intuitiva para interpretar y comunicar eficazmente las tendencias financieras descubiertas.
+Aca pueden ver su trabajo realizado [Dashboard](https://www.novypro.com/project/dashboard-de-análisis-de-tendencias-de-acciones)
+
 Repositorio General del Proyecto
 
 Para acceder al repositorio completo del proyecto, donde trabajo el equipo completo: [Repositorio del equipo](https://github.com/No-Country/c16-96-m-data-bi).
