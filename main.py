@@ -126,7 +126,7 @@ def obtener_prediccion_RandonForest(accion: str) -> dict:
     return {
         "accion": accion,
         "prediccion_futura":precio_predicho[0],
-        'Fecha': ultima_fecha,
+        'Fecha': fecha_prediccion,
         'R2':r2
     }
     
@@ -175,7 +175,7 @@ def obtener_prediccion_RegresionLineal(accion: str) -> dict:
     return {
         "accion": accion,
         "prediccion_futura":precio_predicho[0],
-        'Fecha': ultima_fecha,
+        'Fecha': fecha_prediccion,
         'R2':r2
     }
     
